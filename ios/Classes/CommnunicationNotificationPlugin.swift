@@ -25,13 +25,13 @@ class CommunicationNotificationPlugin {
     
     func dispatchNotification(_ notificationInfo: NotificationInfo) {
         if #available(iOS 15.0, *) {
-            let identifier = "mason"
+            let identifier = "CommunicationNotification"
             var content = UNMutableNotificationContent()
             
             content.title = notificationInfo.senderName
             content.subtitle = ""
             content.body = notificationInfo.content
-            content.sound = nil
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "alarm"))
             content.categoryIdentifier = "Event"
             
             var personNameComponents = PersonNameComponents()
@@ -86,15 +86,15 @@ class CommunicationNotificationPlugin {
                 // Handle errors
             }
             
-            // Show 0 seconds from now
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+            // Show 30 seconds from now
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
             
             // Request from identifier
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
             // actions
             let close = UNNotificationAction(identifier: "close", title: "Close", options: .destructive)
-            //        let reply = UNNotificationAction(identifier: "reply", title: "Reply", options: .foreground)
+//            let reply = UNNotificationAction(identifier: "reply", title: "Reply", options: .foreground)
             let category = UNNotificationCategory(identifier: "Event", actions: [close], intentIdentifiers: [])
             
             UNUserNotificationCenter.current().setNotificationCategories([category])
