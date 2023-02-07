@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:ios_communication_notification/models/notification_info_model.dart';
@@ -25,10 +27,11 @@ class MethodChannelIosCommunicationNotification
 
   @override
   Future<bool> isAvailable() async {
-    final bool result = await methodChannel.invokeMethod(
-          "isAvailable",
-        ) ??
-        false;
-    return result;
+    if (!Platform.isIOS) return false;
+
+    final bool isAvailable =
+        await methodChannel.invokeMethod<bool>("isAvailable") ?? false;
+
+    return isAvailable;
   }
 }
