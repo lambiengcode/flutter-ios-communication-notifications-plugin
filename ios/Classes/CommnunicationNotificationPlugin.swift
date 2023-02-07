@@ -37,7 +37,7 @@ class CommunicationNotificationPlugin {
             var personNameComponents = PersonNameComponents()
             personNameComponents.nickname = notificationInfo.senderName
             
-            let avatar = INImage(imageData: UIImage(named: "avatar_default")!.pngData()!)
+            let avatar = INImage(imageData: notificationInfo.pngImage)
             
             let senderPerson = INPerson(
                 personHandle: INPersonHandle(value: notificationInfo.value, type: .unknown),
