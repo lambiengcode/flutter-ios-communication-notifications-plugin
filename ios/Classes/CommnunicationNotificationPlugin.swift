@@ -36,7 +36,7 @@ class CommunicationNotificationPlugin {
         var personNameComponents = PersonNameComponents()
         personNameComponents.nickname = notificationInfo.senderName
         
-        let avatar = INImage(imageData: UIImage(named: "Avatar")!.pngData()!)
+        let avatar = INImage(imageData: UIImage(named: "avatar_default")!.pngData()!)
         
         let senderPerson = INPerson(
             personHandle: INPersonHandle(value: notificationInfo.value, type: .unknown),
@@ -61,10 +61,29 @@ class CommunicationNotificationPlugin {
         )
         
         
+        let intent = INSendMessageIntent(
+            recipients: [mePerson],
+            outgoingMessageType: .outgoingMessageText,
+            content: "Text",
+            speakableGroupName: INSpeakableString(spokenPhrase: "Sender Name"),
+            conversationIdentifier: "sampleConversationIdentifier",
+            serviceName: nil,
+            sender: senderPerson,
+            attachments: nil
+        )
+        
+        intent.setImage(avatar, forParameterNamed: \.sender)
+        
         let interaction = INInteraction(intent: intent, response: nil)
         interaction.direction = .incoming
         
         interaction.donate(completion: nil)
+        
+        do {
+            content = try content.updating(from: intent) as! UNMutableNotificationContent
+        } catch {
+            // Handle errors
+        }
         
         // Show 0 seconds from now
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
