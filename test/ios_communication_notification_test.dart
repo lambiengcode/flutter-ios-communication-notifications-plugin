@@ -15,6 +15,9 @@ class MockIosCommunicationNotificationPlatform
   Future<void> showNotification(NotificationInfo info) async {
     return;
   }
+
+  @override
+  Future<bool> isAvailable() => Future.value(true);
 }
 
 void main() {

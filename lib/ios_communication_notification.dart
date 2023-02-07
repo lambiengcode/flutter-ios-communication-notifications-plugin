@@ -17,4 +17,8 @@ class IosCommunicationNotification {
   Future<void> showNotification(NotificationInfo info) {
     return IosCommunicationNotificationPlatform.instance.showNotification(info);
   }
+
+  Future<bool> isAvailable() {
+    return IosCommunicationNotificationPlatform.instance.isAvailable();
+  }
 }

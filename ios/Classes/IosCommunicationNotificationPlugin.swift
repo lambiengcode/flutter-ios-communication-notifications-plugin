@@ -24,6 +24,13 @@ public class IosCommunicationNotificationPlugin: NSObject, FlutterPlugin {
             CommunicationNotificationPlugin().showNotification(NotificationInfo(senderName: senderName, pngImage: avatar, content: content, value: value))
             result(true)
             break
+        case "isAvailable":
+            if #available(iOS 15.0, *) {
+                result(true)
+            } else {
+                result(false)
+            }
+            break
         default:
             result(FlutterMethodNotImplemented)
             break

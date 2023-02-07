@@ -22,4 +22,13 @@ class MethodChannelIosCommunicationNotification
   Future<void> showNotification(NotificationInfo info) async {
     await methodChannel.invokeMethod("showNotification", info.toMap());
   }
+
+  @override
+  Future<bool> isAvailable() async {
+    final bool result = await methodChannel.invokeMethod(
+          "isAvailable",
+        ) ??
+        false;
+    return result;
+  }
 }
