@@ -1,3 +1,6 @@
+import Intents
+import UIKit
+import UserNotifications
 
 class CommunicationNotificationPlugin {
     func showNotification(_ notificationInfo: NotificationInfo) {
