@@ -63,11 +63,11 @@ class CommunicationNotificationPlugin {
         
         interaction.donate(completion: nil)
         
-        // Show 5 seconds from now
-        //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        //
-        //        // Request from identifier
-        //        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        // Show 0 seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+        
+        // Request from identifier
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         // actions
         let close = UNNotificationAction(identifier: "close", title: "Close", options: .destructive)
