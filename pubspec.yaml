@@ -1,6 +1,6 @@
 name: ios_communication_notification
 description: A new Flutter plugin project.
-version: 0.0.3
+version: 0.0.4
 homepage:
 
 environment:
@@ -39,8 +39,8 @@ flutter:
     # then add platforms following the instruction here:
     # https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms
     # -------------------
-      some_platform:
-        pluginClass: somePluginClass
+      ios:
+        pluginClass: IosCommunicationNotificationPlugin
     # -------------------
 
   # To add assets to your plugin package, add an assets section, like this:
