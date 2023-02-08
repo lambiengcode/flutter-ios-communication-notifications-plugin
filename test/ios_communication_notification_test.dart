@@ -18,6 +18,11 @@ class MockIosCommunicationNotificationPlatform
 
   @override
   Future<bool> isAvailable() => Future.value(true);
+
+  @override
+  void onClickNotification(Function(String payload) onClick) {
+    return;
+  }
 }
 
 void main() {

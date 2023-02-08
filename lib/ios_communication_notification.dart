@@ -21,4 +21,9 @@ class IosCommunicationNotification {
   Future<bool> isAvailable() {
     return IosCommunicationNotificationPlatform.instance.isAvailable();
   }
+
+  void setOnClickNotification(Function(String payload) onClick) {
+    return IosCommunicationNotificationPlatform.instance
+        .onClickNotification(onClick);
+  }
 }

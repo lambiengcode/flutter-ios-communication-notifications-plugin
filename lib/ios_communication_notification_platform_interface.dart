@@ -34,6 +34,10 @@ abstract class IosCommunicationNotificationPlatform extends PlatformInterface {
   }
 
   Future<bool> isAvailable() {
-    throw UnimplementedError('showNotification() has not been implemented.');
+    throw UnimplementedError('isAvailable() has not been implemented.');
+  }
+
+  void onClickNotification(Function(String payload) onClick) {
+    throw UnimplementedError('onClickNotification() has not been implemented.');
   }
 }

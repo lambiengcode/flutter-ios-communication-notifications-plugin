@@ -25,14 +25,16 @@ class CommunicationNotificationPlugin {
     
     func dispatchNotification(_ notificationInfo: NotificationInfo) {
         if #available(iOS 15.0, *) {
-            let identifier = "CommunicationNotification"
+            let uuid = UUID.init().uuidString
+            let identifier = "\(IosCommunicationConstant.prefixIdentifier):\(uuid)"
             var content = UNMutableNotificationContent()
             
             content.title = notificationInfo.senderName
             content.subtitle = ""
             content.body = notificationInfo.content
             content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "alarm"))
-            content.categoryIdentifier = "Event"
+            content.categoryIdentifier = identifier
+            content.userInfo = ["data": notificationInfo.value]
             
             var personNameComponents = PersonNameComponents()
             personNameComponents.nickname = notificationInfo.senderName
@@ -50,7 +52,7 @@ class CommunicationNotificationPlugin {
                 suggestionType: .none
             )
             
-            let mePerson = INPerson(
+            let mPerson = INPerson(
                 personHandle: INPersonHandle(value: "", type: .unknown),
                 nameComponents: nil,
                 displayName: nil,
@@ -63,7 +65,7 @@ class CommunicationNotificationPlugin {
             
             
             let intent = INSendMessageIntent(
-                recipients: [mePerson],
+                recipients: [mPerson],
                 outgoingMessageType: .outgoingMessageText,
                 content: notificationInfo.content,
                 speakableGroupName: INSpeakableString(spokenPhrase: notificationInfo.senderName),
@@ -87,15 +89,15 @@ class CommunicationNotificationPlugin {
             }
             
             // Show 30 seconds from now
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
             
             // Request from identifier
-            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
             
             // actions
             let close = UNNotificationAction(identifier: "close", title: "Close", options: .destructive)
 //            let reply = UNNotificationAction(identifier: "reply", title: "Reply", options: .foreground)
-            let category = UNNotificationCategory(identifier: "Event", actions: [close], intentIdentifiers: [])
+            let category = UNNotificationCategory(identifier: identifier, actions: [close], intentIdentifiers: [])
             
             UNUserNotificationCenter.current().setNotificationCategories([category])
             
