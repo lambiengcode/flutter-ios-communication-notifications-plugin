@@ -9,8 +9,6 @@ public class IosCommunicationNotificationPlugin: NSObject, FlutterPlugin {
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result("iOS " + UIDevice.current.systemVersion)
-        
         switch (call.method) {
         case "showNotification":
             let arguments = call.arguments as? [String: Any] ?? [String: Any]()
