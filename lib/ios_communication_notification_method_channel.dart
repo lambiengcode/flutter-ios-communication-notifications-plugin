@@ -14,6 +14,15 @@ class MethodChannelIosCommunicationNotification
   final methodChannel = const MethodChannel('ios_communication_notification');
 
   @override
+  Future<String?> getInitialPayload() async {
+    final String? payload = await methodChannel.invokeMethod<String>(
+      "getInitialPayload",
+    );
+
+    return payload;
+  }
+
+  @override
   void onClickNotification(Function(String payload) onClick) {
     methodChannel.setMethodCallHandler((call) async {
       if (call.method == "onClick") {

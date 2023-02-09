@@ -23,6 +23,9 @@ class MockIosCommunicationNotificationPlatform
   void onClickNotification(Function(String payload) onClick) {
     return;
   }
+
+  @override
+  Future<String?> getInitialPayload() => Future.value("lambiengcode");
 }
 
 void main() {

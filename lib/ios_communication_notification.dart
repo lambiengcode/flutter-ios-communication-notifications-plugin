@@ -26,4 +26,8 @@ class IosCommunicationNotification {
     return IosCommunicationNotificationPlatform.instance
         .onClickNotification(onClick);
   }
+
+  Future<String?> getInitialPayload() async {
+    return IosCommunicationNotificationPlatform.instance.getInitialPayload();
+  }
 }
