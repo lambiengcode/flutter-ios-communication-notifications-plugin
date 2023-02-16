@@ -1,3 +1,4 @@
-## 0.0.1
+## 1.0.1
 
-* TODO: Describe initial release.
+* support show communication notification on ios 15 or above
+* support callback onclick notification
