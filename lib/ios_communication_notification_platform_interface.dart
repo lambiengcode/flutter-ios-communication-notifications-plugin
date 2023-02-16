@@ -25,10 +25,6 @@ abstract class IosCommunicationNotificationPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
-
   Future<void> showNotification(NotificationInfo info) {
     throw UnimplementedError('showNotification() has not been implemented.');
   }

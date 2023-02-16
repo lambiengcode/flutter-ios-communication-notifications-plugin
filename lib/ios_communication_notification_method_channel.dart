@@ -33,13 +33,6 @@ class MethodChannelIosCommunicationNotification
   }
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version =
-        await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
-  }
-
-  @override
   Future<void> showNotification(NotificationInfo info) async {
     await methodChannel.invokeMethod("showNotification", info.toMap());
   }

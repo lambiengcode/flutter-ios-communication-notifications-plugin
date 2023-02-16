@@ -77,6 +77,22 @@ IosCommunicationNotification().showNotification(
 );
 ```
 
+- Get initial payload - useful for check and get payload if app start from click communication notification
+
+```dart
+IosCommunicationNotification().getInitialPayload().then((payload) {
+    // TODO: do somethings
+});
+```
+
+- Set onClick callback function
+  
+```dart
+IosCommunicationNotification().setOnClickNotification((payload) {
+    // TODO: do somethings
+});
+```
+
 ### ReactionBoxParamenters
 | parameter                  | description                                                                           | default                                                                                                                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
