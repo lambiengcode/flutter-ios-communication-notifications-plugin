@@ -3,7 +3,10 @@
 - Ref: [Apple Docs](https://developer.apple.com/documentation/usernotifications/implementing_communication_notifications)
 
 
-## Screenshots: Update later
+## Screenshots:
+
+<img src="screenshots/IMG_0768.png" width="200px" />
+<img src="screenshots/IMG_0769.jpg" width="200px" />
 
 ## Features
 
