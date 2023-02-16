@@ -6,8 +6,8 @@
 ## Screenshots:
 
 <p>
-<img src="screenshots/IMG_0768.png" width="200px" />
-<img src="screenshots/IMG_0769.jpg" width="200px" />
+<img src="https://github.com/lambiengcode/ios_communication_notification/raw/main/screenshots/IMG_0768.png?raw=true" width="200px" />
+<img src="https://github.com/lambiengcode/ios_communication_notification/raw/main/screenshots/IMG_0769.jpg?raw=true" width="200px" />
 </p
 
 ## Features
