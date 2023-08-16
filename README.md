@@ -23,7 +23,31 @@
 flutter pub add ios_communication_notification
 ```
 
+```terminal
+flutter clean && flutter pub get
+```
+<br/>
+
+- Config XCode
+
+> Capabilities
+1. Open your Project in XCode.
+2. Click on `Runner`, then Target `Runner`
+3. Click on Signing & Capabilities
+4. Add Capability
+5. Add Communication Notifications
+
+> Info.plist
+1. Open `Info.plist`
+2. Add `NSUserActivityTypes` as type array
+3. Add `INSendMessageIntent` as the element of the newly created array
+
+<br/>
+
 - Config AppDelegate Extension
+
+1. Open `AppDelegate.swift`
+2. Copy the below piece of code and add it at the end of the file
 
 ```swift
 import UIKit
