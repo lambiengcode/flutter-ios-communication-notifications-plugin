@@ -3,19 +3,51 @@ import UIKit
 import UserNotifications
 
 class CommunicationNotificationPlugin {
+
+    // Function to check if a notification with the same content has been delivered
+    func hasDuplicateNotification(_ notificationInfo: NotificationInfo, completion: @escaping (Bool) -> Void) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        notificationCenter.getDeliveredNotifications { deliveredNotifications in
+            // Loop through the delivered notifications
+            for deliveredNotification in deliveredNotifications {
+                // Check the content of the delivered notification
+                if let notificationContent = deliveredNotification.request.content as? UNMutableNotificationContent,
+                   notificationContent.title == notificationInfo.senderName && notificationContent.body == notificationInfo.content {
+                    // If a duplicate notification is found, return true
+                    completion(true)
+                    return
+                }
+            }
+            
+            // If no duplicate notification is found, return false
+            completion(false)
+        }
+    }
+
     func showNotification(_ notificationInfo: NotificationInfo) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getNotificationSettings {
             settings in switch settings.authorizationStatus {
             case .authorized:
-                self.dispatchNotification(notificationInfo)
+                self.hasDuplicateNotification(notificationInfo) { hasDuplicate in
+                    if !hasDuplicate {
+                        // If no duplicate notification is found, proceed to show the new notification
+                        self.dispatchNotification(notificationInfo)
+                    }
+                }
             case .denied:
                 return
             case .notDetermined:
                 notificationCenter.requestAuthorization(options: [.alert, .sound]) {
                     didAllow, _ in
                     if didAllow {
-                        self.dispatchNotification(notificationInfo)
+                        self.hasDuplicateNotification(notificationInfo) { hasDuplicate in
+                            if !hasDuplicate {
+                                // If no duplicate notification is found, proceed to show the new notification
+                                self.dispatchNotification(notificationInfo)
+                            }
+                        }
                     }
                 }
             default: return
@@ -90,15 +122,11 @@ class CommunicationNotificationPlugin {
                 // Handle errors
             }
             
-            // Show 30 seconds from now
-//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-            
             // Request from identifier
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
             
             // actions
             let close = UNNotificationAction(identifier: "close", title: "Close", options: .destructive)
-//            let reply = UNNotificationAction(identifier: "reply", title: "Reply", options: .foreground)
             let category = UNNotificationCategory(identifier: identifier, actions: [close], intentIdentifiers: [])
             
             UNUserNotificationCenter.current().setNotificationCategories([category])
